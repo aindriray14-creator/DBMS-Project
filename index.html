@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>All Events</h2>
+<table>
+  <tr><th>ID</th><th>Event</th><th>Club</th><th>Venue</th><th>Start</th><th>End</th><th>Status</th><th>Actions</th></tr>
+  {% for e in events %}
+  <tr>
+    <td>{{ e[0] }}</td><td>{{ e[1] }}</td><td>{{ e[2] }}</td><td>{{ e[3] }}</td>
+    <td>{{ e[4] }}</td><td>{{ e[5] }}</td><td>{{ e[6] }}</td>
+    <td>
+      <form method="POST" action="/update_status/{{ e[0] }}" style="display:inline">
+        <select name="status" style="width:auto; margin-top:0">
+          {% for s in ['Planned', 'Ongoing', 'Completed', 'Cancelled'] %}
+          <option value="{{ s }}" {{ 'selected' if s == e[6] else '' }}>{{ s }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" style="margin-top:0; padding:6px 10px">Update</button>
+      </form>
+      <form method="POST" action="/delete_event/{{ e[0] }}" style="display:inline"
+            onsubmit="return confirm('Delete this event and all its volunteers, equipment, sponsorships and expenses?');">
+        <button type="submit" style="margin-top:0; padding:6px 10px; background:#9b1c1c">Delete</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

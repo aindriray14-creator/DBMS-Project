@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Volunteers</h2>
+<table>
+  <tr><th>Event</th><th>Student</th><th>Department</th><th>Role</th><th>Status</th></tr>
+  {% for r in rows %}
+  <tr><td>{{ r[0] }}</td><td>{{ r[1] }}</td><td>{{ r[2] }}</td><td>{{ r[3] }}</td><td>{{ r[4] }}</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

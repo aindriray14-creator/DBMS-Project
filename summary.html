@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Financial Summary</h2>
+<table>
+  <tr><th>Event</th><th>Status</th><th>Sponsorship</th><th>Expense</th><th>Net</th></tr>
+  {% for r in rows %}
+  {% set net = r[2] - r[3] %}
+  <tr>
+    <td>{{ r[0] }}</td>
+    <td>{{ r[1] }}</td>
+    <td>{{ '{:,.0f}'.format(r[2]) }}</td>
+    <td>{{ '{:,.0f}'.format(r[3]) }}</td>
+    <td class="{{ 'pos' if net >= 0 else 'neg' }}">{{ '{:,.0f}'.format(net) }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
